@@ -1,0 +1,21 @@
+{
+    "name": "hostingprecisie/voyager-form",
+    "description": "Make custom forms in voyager",
+    "type": "laravel",
+    "require": {
+        "tcg/voyager": "^1.0",
+        "laravelcollective/html": "^5.6"
+    },
+    "support": {
+        "issues": "https://github.com/the-control-group/voyager/issues",
+        "source": "https://github.com/the-control-group/voyager"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hostingprecisie",
+            "email": "info@hostingprecisie.nl"
+        }
+    ],
+    "minimum-stability": "dev"
+}
