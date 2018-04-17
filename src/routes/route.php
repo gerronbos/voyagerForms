@@ -14,6 +14,7 @@ Route::group(['as' => 'voyager.',"prefix"=>$prefix."/forms","middleware"=>["web"
 
     //Form items
     Route::get('/{id}/items', ['uses' => 'Hostingprecisie\VoyagerForm\Http\Controllers\VoyagerFormItemsController@index','as' => 'form.items']);
+
     Route::get('/{id}/items/new', ['uses' => 'Hostingprecisie\VoyagerForm\Http\Controllers\VoyagerFormItemsController@add','as' => 'form.items.add']);
     Route::post('/{id}/items/new', ['uses' => 'Hostingprecisie\VoyagerForm\Http\Controllers\VoyagerFormItemsController@postAdd']);
 
@@ -22,5 +23,5 @@ Route::group(['as' => 'voyager.',"prefix"=>$prefix."/forms","middleware"=>["web"
 
     Route::post('/{id}/items/{field_id}/changerow', ['uses' => 'Hostingprecisie\VoyagerForm\Http\Controllers\VoyagerFormItemsController@changerow','as' => 'form.items.changerow']);
 
-
+    Route::delete('/{id}/items/{field_id}', ['uses' => 'Hostingprecisie\VoyagerForm\Http\Controllers\VoyagerFormItemsController@delete','as' => 'form.delete']);
 });

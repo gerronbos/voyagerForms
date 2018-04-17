@@ -40,7 +40,10 @@ class VoyagerFormItemsController extends VoyagerBreadController
         $field->required = ($request->input("required")) ? $request->input("required") : 0;
         $field->save();
 
-        return Redirect::route("voyager.form.items",[$id]);
+        return Redirect::route("voyager.form.items",[$id])->with([
+            'message'    => __('voyager.generic.successfully_updated')." Formulier veld",
+            'alert-type' => 'success',
+        ]);
     }
     public function add()
     {
@@ -61,12 +64,21 @@ class VoyagerFormItemsController extends VoyagerBreadController
         $field->row = FormFields::where("form_id","=",$request->route()->parameter("id"))->count() + 1;
         $field->save();
 
-        return Redirect::route("voyager.form.items",[$request->route()->parameter("id")]);
+        return Redirect::route("voyager.form.items",[$request->route()->parameter("id")])->with([
+            'message'    => __('voyager.generic.successfully_added_new')." Formulier veld",
+            'alert-type' => 'success',
+        ]);
     }
 
-    public function delete(User $user)
+    public function delete(User $user,$id,$field_id)
     {
+        $field = FormFields::find($field_id);
+        $field->delete();
 
+        return Redirect::route("voyager.form.items",[$id])->with([
+            'message'    => __('voyager.generic.successfully_deleted')." Formulier veld",
+            'alert-type' => 'success',
+        ]);
     }
 
     public function index(Request $request){
@@ -86,7 +98,10 @@ class VoyagerFormItemsController extends VoyagerBreadController
 
         VoyagerFormItemServiceProvider::changeRow(FormFields::find($request->route()->parameter("field_id")),$request->input("direction"));
 
-        return Redirect::route("voyager.form.items",[$request->route()->parameter("id")]);
+        return Redirect::route("voyager.form.items",[$request->route()->parameter("id")])->with([
+            'message'    => __('voyager.generic.successfully_updated')." Formulier veld",
+            'alert-type' => 'success',
+        ]);
 
     }
 }

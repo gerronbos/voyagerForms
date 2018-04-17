@@ -45,7 +45,7 @@
                         <td>{{$field->required}}</td>
                         <td class="no-sort no-click bread-actions">
                             @can('delete', $form)
-                                <div class="btn btn-sm btn-danger pull-right delete" data-id="{{ $form->id }}">
+                                <div class="btn btn-sm btn-danger pull-right delete" data-id="{{ $field->id }}">
                                     <i class="voyager-trash"></i> {{ __('voyager.generic.delete') }}
                                 </div>
                             @endcan
@@ -72,9 +72,47 @@
 {!! Form::open(["id"=>"change_row_form"]) !!}
 <input type="hidden" name="direction" id="change_row_direction">
 {!! Form::close() !!}
+
+<div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('voyager.generic.close') }}"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="voyager-trash"></i> {{ __('voyager.generic.delete_question') }} Formulier?</h4>
+                </div>
+                <div class="modal-footer">
+                    <form action="{{ route('voyager.form.items',[$form->id]) }}" id="delete_form" method="POST">
+                        {{ method_field("DELETE") }}
+                        {{ csrf_field() }}
+                        <input type="submit" class="btn btn-danger pull-right delete-confirm"
+                                 value="{{ __('voyager.generic.delete_confirm') }} Formulier">
+                    </form>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">{{ __('voyager.generic.cancel') }}</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 
 @section('javascript')
+<script>
+    var deleteFormAction;
+        $('td').on('click', '.delete', function (e) {
+            var form = $('#delete_form')[0];
+
+            if (!deleteFormAction) { // Save form action initial value
+                deleteFormAction = form.action;
+            }
+
+            form.action = deleteFormAction.match(/\/[0-9]+$/)
+                ? deleteFormAction.replace(/([0-9]+$)/, $(this).data('id'))
+                : deleteFormAction + '/' + $(this).data('id');
+            console.log(form.action);
+
+            $('#delete_modal').modal('show');
+        });
+</script>
 <script>
     var url = "{{route("voyager.form.items.changerow",[$form->id,":ID"])}}"
     $(".row_up").click(function(){
