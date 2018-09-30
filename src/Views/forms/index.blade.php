@@ -6,7 +6,7 @@
     <h1 class="page-title">
         <i class="voyager-receipt"></i> Formulieren
         @can('add',$model_name)
-            <a href="{{route("voyager.form.add")}}" class="btn btn-success">
+            <a href="{{route("voyager.form.create")}}" class="btn btn-success">
                 <i class="voyager-plus"></i> {{ __('voyager.generic.add_new') }}
             </a>
         @endcan
@@ -47,11 +47,11 @@
                                 <i class="voyager-edit"></i> {{ __('voyager.generic.edit') }}
                             </a>
                         @endcan
-                        @can('read', $form)
+                        {{-- @can('read', $form)
                             <a href="" class="btn btn-sm btn-success pull-right">
                                 <i class="voyager-list"></i> {{ __('voyager.generic.view') }}
                             </a>
-                        @endcan
+                        @endcan --}}
                     </td>
                 </tr>
             @endforeach
@@ -93,7 +93,7 @@
 
             form.action = deleteFormAction.match(/\/[0-9]+$/)
                 ? deleteFormAction.replace(/([0-9]+$)/, $(this).data('id'))
-                : deleteFormAction + '/' + $(this).data('id');
+                : deleteFormAction + '/' + $(this).data('id') + "/delete";
             console.log(form.action);
 
             $('#delete_modal').modal('show');

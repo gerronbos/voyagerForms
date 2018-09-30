@@ -9,8 +9,9 @@ use Hostingprecisie\VoyagerForm\Models\Form;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use View,Auth,Redirect;
+use App\Http\Controllers\Controller;
 
-class VoyagerFormItemsController extends VoyagerBreadController
+class VoyagerFormItemsController extends Controller
 {
 
     public function browse(User $user)
@@ -23,7 +24,7 @@ class VoyagerFormItemsController extends VoyagerBreadController
         ));
     }
 
-    public function edit(Request $request, $id)
+    public function edit($table)
     {
         $view = "voyagerForm::forms.items.add-edit";
         $field = FormFields::find($request->route()->parameter("field_id"));

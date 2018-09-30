@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use View,Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Controller;
 
-class VoyagerFormController extends VoyagerBreadController
+class VoyagerFormController extends Controller
 {
 
     public function browse(User $user)
@@ -22,7 +23,7 @@ class VoyagerFormController extends VoyagerBreadController
         ));
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request,$id)
     {
         $view = "voyagerForm::forms.add-edit";
         $form = Form::find($id);
@@ -42,7 +43,7 @@ class VoyagerFormController extends VoyagerBreadController
             'alert-type' => 'success',
         ]);
     }
-    public function add()
+    public function create()
     {
         $view = "voyagerForm::forms.add-edit";
         $form = new Form();
