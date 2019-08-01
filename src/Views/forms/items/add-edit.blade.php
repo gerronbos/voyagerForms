@@ -39,6 +39,7 @@
                         <option value="select" @if($field->type == "select") selected @endif>Dropdown</option>
                         <option value="radiobutton" @if($field->type == "radiobutton") selected @endif>Radiobuttons (1 antwoord mogelijk)</option>
                         <option value="checkbox" @if($field->type == "checkbox") selected @endif>Checkboxes (meerdere antwoorden mogelijk)</option>
+                        <option value="spacing" @if($field->type == "spacing") selected @endif>Tussen tekst</option>
                     </select>
                 </div>
                 <div class="options" style="width:20%;">
@@ -57,6 +58,10 @@
                         @endif
                         
                     </div>
+                </div>
+                <div class="spacing_tekst">
+                    {!! Form::label("description","Omschrijving/uitleg") !!}
+                    <textarea class="richTextBox" name="spacing_tekst">@if(is_array($field->options) && isset($field->options["description"])){{$field->options["description"]}}@endif</textarea>
                 </div>
                 <div class="form-group">
                     {!! Form::label("required","Required") !!}
@@ -83,11 +88,22 @@ $("[name='type']").on('change',function(){
 checkType();
 
 function checkType(){
+    console.log($("[name='type']").val() == "spacing");
     if($("[name='type']").val() !== "text" && $("[name='type']").val() !== "textarea"){
-        $(".options").show();
+        if($("[name='type']").val() == "spacing"){
+            console.log($("[name='type']").val());
+            $(".options").hide();
+            $(".spacing_tekst").show();
+        }
+        else{
+            $(".options").show();
+            $(".spacing_tekst").hide();
+        }
+
     }
     else{
         $(".options").hide();
+        $(".spacing_tekst").hide();
     }
 }
 

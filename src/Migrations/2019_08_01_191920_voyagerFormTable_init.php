@@ -46,6 +46,7 @@ class VoyagerFormTableInit extends Migration
         $data_type->icon = "voyager-receipt";
         $data_type->model_name = "Hostingprecisie\VoyagerForm\Models\Form";
         $data_type->generate_permissions = 1;
+        $data_type->policy_name = "Hostingprecisie\VoyagerForm\Policies\FormPolicy";
         $data_type->save();
 
 
