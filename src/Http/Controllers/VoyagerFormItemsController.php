@@ -24,7 +24,7 @@ class VoyagerFormItemsController extends Controller
         ));
     }
 
-    public function edit($table)
+    public function edit(Request $request, $table)
     {
         $view = "voyagerForm::forms.items.add-edit";
         $field = FormFields::find($request->route()->parameter("field_id"));
@@ -39,6 +39,7 @@ class VoyagerFormItemsController extends Controller
         $field->name = $request->input("name");
         $field->type = $request->input("type");
         $field->required = ($request->input("required")) ? $request->input("required") : 0;
+        $field->options = ["answers" => $request->input("answers")];
         $field->save();
 
         return Redirect::route("voyager.form.items",[$id])->with([
@@ -63,6 +64,7 @@ class VoyagerFormItemsController extends Controller
         $field->required = ($request->input("required")) ? $request->input("required") : 0;
         $field->form_id = $request->route()->parameter("id");
         $field->row = FormFields::where("form_id","=",$request->route()->parameter("id"))->count() + 1;
+        $field->options = ["answers" => $request->input("answers")];
         $field->save();
 
         return Redirect::route("voyager.form.items",[$request->route()->parameter("id")])->with([

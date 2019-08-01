@@ -34,6 +34,11 @@
                     {!! Form::label("email","Email") !!}
                     {!! Form::text("email",$form->email,["class"=>"form-control"]) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label("description","Omschrijving/uitleg") !!}
+                    <br><i class="text-muted">Dit komt boven het formulier te staan.</i>
+                    <textarea class="richTextBox" name="description">{{$form->description}}</textarea>
+                </div>
 
             </div>
             <div class="panel-footer">

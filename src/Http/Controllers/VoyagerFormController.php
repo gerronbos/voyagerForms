@@ -36,6 +36,7 @@ class VoyagerFormController extends Controller
         $form = Form::find($id);
         $form->name = $request->input("name");
         $form->email = $request->input("email");
+        $form->description = $request->input("description");
         $form->save();
 
         return Redirect::route("voyager.form.index")->with([
@@ -58,6 +59,7 @@ class VoyagerFormController extends Controller
         $form->name = $request->input("name");
         $form->email = $request->input("email");
         $form->author = Auth::user()->id;
+        $form->description = $request->input("description");
         $form->save();
 
         return Redirect::route("voyager.form.items",[$form->id])->with([

@@ -9,5 +9,7 @@ class FormFields extends Model
     protected $table = 'forms_fields';
 
 
-
+    protected $casts = [
+        'options' => 'array',
+    ];
 }
